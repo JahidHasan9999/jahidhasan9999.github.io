@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jahid Hasan - Portfolio</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        header .subtitle {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        header .subtitle-secondary {
+            font-size: 1.2em;
+            margin-bottom: 25px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        header .contact-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: all 0.3s;
+            font-size: 1.05em;
+            display: inline-block;
+        }
+
+        header .contact-links a:hover {
+            transform: translateY(-2px);
+            opacity: 0.8;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white !important;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            font-weight: 600;
+            padding: 10px 20px !important;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #667eea !important;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        section h2 {
+            font-size: 2.8em;
+            margin-bottom: 50px;
+            color: #2c3e50;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            line-height: 1.9;
+            font-size: 1.15em;
+        }
+
+        /* Slideshow */
+        .slideshow-container {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            min-height: 450px;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fadeIn 1.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slide img {
+            width: 100%; //change here
+            max-height: 750px; // change here
+            object-fit: contain;
+            display: block;
+            background: #f8f9fa;
+        }
+
+        .slide-caption {
+            padding: 25px;
+            text-align: center;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            font-size: 1.2em;
+            color: #555;
+            font-weight: 600;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 25px;
+        }
+
+        .control-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.05em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .slide-counter {
+            font-size: 1.15em;
+            color: #555;
+            font-weight: 700;
+        }
+
+        .dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            height: 14px;
+            width: 14px;
+            margin: 0 6px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot:hover {
+            background-color: #999;
+        }
+
+        .dot.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scale(1.2);
+        }
+
+        /* Experience Cards */
+        .experience-item {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .experience-item.engineering {
+            border-left-color: #e74c3c;
+        }
+
+        .experience-item h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+            font-weight: 700;
+        }
+
+        .experience-item.engineering h3 {
+            color: #e74c3c;
+        }
+
+        .experience-item .period {
+            color: #777;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        .experience-item ul {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+
+        .experience-item ul li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            height: 100%;
+            border-top: 4px solid #667eea;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .badge.tech {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .project-card ul {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+
+        .project-card ul li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        /* Skills Section */
+        .skills-category {
+            background: white;
+            padding: 45px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+
+        .skills-category h3 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .skills-category.technical h3 {
+            color: #e74c3c;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .skill-item:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .technical .skill-item:hover {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            margin: 8px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            section h2 {
+                font-size: 2.2em;
+            }
+
+            .control-btn {
+                padding: 12px 25px;
+                font-size: 0.95em;
+            }
+
+            .slide img {
+                max-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>Jahid Hasan</h1>
+            <p class="subtitle">Founder & CEO | System Designer | Product Thinker</p>
+            <p class="subtitle-secondary">Electrical & Electronic Engineering Undergraduate</p>
+            <div class="contact-links mt-4">
+                <a href="mailto:jahid.hasan09@northsouth.edu"><i class="bi bi-envelope-fill"></i> jahid.hasan09@northsouth.edu</a>
+                <a href="tel:+8801821233581"><i class="bi bi-phone-fill"></i> +880 1821233581</a>
+                <span><i class="bi bi-geo-alt-fill"></i> Gazipur, Dhaka, Bangladesh</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>I'm a multidisciplinary professional combining <strong>startup entrepreneurship</strong> with <strong>electrical engineering expertise</strong>. As a final-year EEE student at North South University, I've successfully bridged the gap between technical engineering knowledge and product innovation.</p>
+                <br>
+                <p>On the <strong>product side</strong>, I founded and led Wyseer, an EdTech platform serving university students, and developed an AI-based advising system with 2,000+ organic users. I specialize in system design, UI/UX, and creating user-centric solutions that solve real problems.</p>
+                <br>
+                <p>On the <strong>engineering side</strong>, I have hands-on experience in power systems, embedded systems, and control systems. My internship at NSU's Sub Power Station and multiple hardware projects have given me practical expertise in electrical systems, automation, and embedded design using Arduino and STM32.</p>
+                <br>
+                <p>This unique combination allows me to approach challenges from both a product strategy perspective and a deep technical understanding of how systems actually work.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" style="background: #fff;">
+        <div class="container">
+            <h2>Product Design Portfolio</h2>
+            
+            <div class="slideshow-container">
+                <div class="slide active">
+                    <img src="1.png" alt="Product Design 1" onerror="this.src='1.jpg'">
+                    <div class="slide-caption">NSU Course Analysis & Planning System</div>
+                </div>
+                <div class="slide">
+                    <img src="2.png" alt="Product Design 2" onerror="this.src='2.jpg'">
+                    <div class="slide-caption">Product Design 2</div>
+                </div>
+                <div class="slide">
+                    <img src="5.png" alt="Product Design 3" onerror="this.src='5.jpg'">
+                    <div class="slide-caption">Product Design 3</div>
+                </div>
+                <div class="slide">
+                    <img src="4.png" alt="Product Design 4" onerror="this.style.display='none'">
+                    <div class="slide-caption">Product Design 4</div>
+                </div>
+                <div class="slide">
+                    <img src="6.jpg" alt="Product Design 5" onerror="this.style.display='none'">
+                    <div class="slide-caption">Product Design 5</div>
+                </div>
+                <div class="slide">
+                    <img src="yo.jpg" alt="Product Design 6" onerror="this.style.display='none'">
+                    <div class="slide-caption">Product Design 6</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn" onclick="changeSlide(-1)"><i class="bi bi-chevron-left"></i> Previous</button>
+                <span class="slide-counter"><span id="current">1</span> / <span id="total">6</span></span>
+                <button class="control-btn" onclick="changeSlide(1)">Next <i class="bi bi-chevron-right"></i></button>
+            </div>
+
+            <div class="dots">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
+                <span class="dot" onclick="goToSlide(3)"></span>
+                <span class="dot" onclick="goToSlide(4)"></span>
+                <span class="dot" onclick="goToSlide(5)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2>Professional Experience</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="experience-item">
+                        <h3><i class="bi bi-rocket-takeoff"></i> Founder & CEO / System Designer</h3>
+                        <div class="period">Wyseer (EdTech Startup) | May 2024 – Dec 2025</div>
+                        <ul>
+                            <li>Founded and led Wyseer, an advanced notes-sharing and academic support platform for university students</li>
+                            <li>Designed the core system where students can upload, sell, and purchase advanced notes with video and voice explanations</li>
+                            <li>Developed platform rules, content structure, and monetization flow for peer-to-peer academic content sharing</li>
+                            <li>Led full product lifecycle including idea validation, system design, feature planning, and iteration</li>
+                            <li>Designed UI/UX flows and product interfaces using Figma, focusing on usability and clarity</li>
+                            <li>Handled marketing, user growth, content strategy, and overall operational management</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="experience-item engineering">
+                        <h3><i class="bi bi-lightning-charge-fill"></i> Electrical & Electronics Engineering Intern</h3>
+                        <div class="period">Sub Power Station, NSU | May 2024 – Jun 2024</div>
+                        <ul>
+                            <li>Observed and analyzed operation of medium- and low-voltage circuit breakers, relays, and grounding systems</li>
+                            <li>Assisted engineers in monitoring transformers, switchgear, and power protection units in the university distribution network</li>
+                            <li>Performed routine voltage, load current, and power factor measurements and documented operational observations</li>
+                            <li>Gained practical exposure to electrical safety standards and substation maintenance procedures</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" style="background: #fff;">
+        <div class="container">
+            <h2>Key Projects</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <span class="badge"><i class="bi bi-cpu-fill"></i> Product / AI</span>
+                        <h3>NSU AI-Based Advising & Course Planning System</h3>
+                        <ul>
+                            <li>Designed and launched an AI-driven academic advising platform for NSU students</li>
+                            <li>Implemented intelligent course distribution based on completed credits and prerequisite rules</li>
+                            <li>Enabled students to visualize remaining semesters, credits, prerequisites, and incomplete courses</li>
+                            <li>Built smart CGPA calculation and academic progress tracking features</li>
+                            <li><strong>Achieved 2,000+ organic traffic and 300+ registered users</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <span class="badge tech"><i class="bi bi-motherboard-fill"></i> Embedded Systems</span>
+                        <h3>Smart Home Automation & Safety System</h3>
+                        <ul>
+                            <li>Designed an Arduino-based home automation and safety system integrating PIR, gas, and fire sensors</li>
+                            <li>Implemented real-time monitoring with local LED alerts and remote email-based notifications</li>
+                            <li>Focused on system reliability, sensor fusion, and fault-tolerant design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <span class="badge tech"><i class="bi bi-robot"></i> Robotics</span>
+                        <h3>Autonomous Fire Fighting Robot</h3>
+                        <ul>
+                            <li>Developed a 4-wheel autonomous robot using IR/UV flame sensors for fire detection</li>
+                            <li>Implemented closed-loop motor control for navigation and obstacle handling</li>
+                            <li>Designed a water-based fire suppression mechanism activated upon flame localization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2>Skills & Expertise</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="skills-category">
+                        <h3><i class="bi bi-rocket-fill"></i> Product & Business</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6"><div class="skill-item">Startup Leadership</div></div>
+                            <div class="col-md-6"><div class="skill-item">System Design</div></div>
+                            <div class="col-md-6"><div class="skill-item">Product Strategy</div></div>
+                            <div class="col-md-6"><div class="skill-item">UI/UX Design</div></div>
+                            <div class="col-md-6"><div class="skill-item">Figma</div></div>
+                            <div class="col-md-6"><div class="skill-item">Growth & Marketing</div></div>
+                            <div class="col-md-6"><div class="skill-item">User Research</div></div>
+                            <div class="col-md-6"><div class="skill-item">Business Operations</div></div>
+                            <div class="col-md-6"><div class="skill-item">Data-Driven Decisions</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="skills-category technical">
+                        <h3><i class="bi bi-lightning-fill"></i> Engineering & Technical</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6"><div class="skill-item">C / C++</div></div>
+                            <div class="col-md-6"><div class="skill-item">Arduino</div></div>
+                            <div class="col-md-6"><div class="skill-item">STM32</div></div>
+                            <div class="col-md-6"><div class="skill-item">MATLAB / Simulink</div></div>
+                            <div class="col-md-6"><div class="skill-item">Proteus</div></div>
+                            <div class="col-md-6"><div class="skill-item">Multisim</div></div>
+                            <div class="col-md-6"><div class="skill-item">AutoCAD Electrical</div></div>
+                            <div class="col-md-6"><div class="skill-item">Power Electronics</div></div>
+                            <div class="col-md-6"><div class="skill-item">Control Systems</div></div>
+                            <div class="col-md-6"><div class="skill-item">Embedded Systems</div></div>
+                            <div class="col-md-6"><div class="skill-item">Digital Logic Design</div></div>
+                            <div class="col-md-6"><div class="skill-item">HTML / CSS</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Jahid Hasan. All rights reserved.</p>
+            <p>Final Year EEE Student | Startup Founder | Product Designer</p>
+            <p>North South University | Gazipur, Dhaka, Bangladesh</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Slideshow Script -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        document.getElementById('total').textContent = totalSlides;
+
+        function showSlide(n) {
+            if (n >= totalSlides) currentSlide = 0;
+            if (n < 0) currentSlide = totalSlides - 1;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+            document.getElementById('current').textContent = currentSlide + 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        // Auto-play slideshow
+        setInterval(() => {
+            changeSlide(1);
+        }, 10000);
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
